@@ -101,6 +101,13 @@
             border-radius: 50%;
             background: white;
         }
+        #feedback{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 17px;
+        }
     </style>
 </head>
 
@@ -141,11 +148,13 @@
             </label>
         </div>
     </div>
+
+    <p id="feedback"></p>
           
-            <div>
+            <!-- <div>
                 <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
                 <button class="bttn-next" id="next" style="display: block;">Next</button>
-            </div>
+            </div> -->
         </div>
 </div>
 </body>
@@ -251,15 +260,25 @@
        let answers = document.querySelectorAll(".container");
        answers.forEach((container, index)=>{
         container.textContent = questions[currentQuestion].answers[index]
-       })
+       });
+
+       let feedback = document.getElementById("feedback");
+       feedback.textContent = "";
     }
+
+
 
     function checkAnswer(selected){
         if(selected === questions[currentQuestion].correct){
+            let feedback = document.getElementById("feedback");
+            feedback.innerText = "Your answer is correct"
+            feedback.style.color = "green"
             console.log("answer is correct");
             currentAnswer++;
         }
         else{
+            feedback.innerText = "Your answer is not correct! Please try again"
+            feedback.style.color = "red"
             console.log("answer is incorrect")
         }
 
@@ -271,8 +290,7 @@
             }
             else{
                 let quizContainer = document.querySelector(".quizcontainer");
-                quizContainer.innerHTML = "You got" + " " + {currentAnswer} + " " + "out of" + {questions}
-                // console.log("You got a correct answer", currentAnswer, "out of", questions.length)
+               quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions.</p>`;
             }
         }, 2000)
     }
