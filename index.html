@@ -7,9 +7,11 @@
     <title>Javascript Quiz App</title>
     <style>
         .answer-list {
-            background-color: rgb(243, 243, 243);
+            background-color: rgba(243, 243, 243, 0.185);
             padding: 20px 30px;
             width: auto;
+            border: 1px solid rgb(227, 227, 227);
+            border-radius: 20px;
         }
 
         .body-back {
@@ -20,7 +22,29 @@
         }
 
         .gap-bottom {
-            padding-bottom: 5px;
+            padding-bottom: 15px;
+        }
+
+        .bttn-next {
+            padding: 6px 25px;
+            border-radius: 6px;
+            border: none;
+            background-color: #397fc3;
+            color: white;
+        }
+        .bttn-prev{
+             padding: 6px 25px;
+            border-radius: 6px;
+            border: none;
+            background-color: #dddddd;
+            color: rgb(145, 145, 145);
+        }
+        .card{
+            background-color: #ffffff;
+            width: 92%;
+        }
+        .question-heading{
+            font-size: 24px;
         }
     </style>
 </head>
@@ -32,16 +56,25 @@
 <span>/</span>
 <span id="total-score"></span>
 </div> -->
-        <div>
-            <p>Who is considered as the father of HTML’s ?</p>
-            <div class="answer-list gap-bottom">The father of HTML is Tim Berners-Lee</div>
-            <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
+        <div class="card">
+            <p class="question-heading">Who is considered as the father of HTML’s ?</p>
+            <div class="gap-bottom">
+                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
+            </div>
+            <div class="gap-bottom">
+                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
+            </div>
+            <div class="gap-bottom">
+                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
+            </div>
+            <div class="gap-bottom">
+                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
+            </div>
+
         </div>
         <div>
-            <button onclick="myFunc()">Next</button>
-            <button>Prev</button>
+            <button class="bttn-prev">Prev</button>
+            <button onclick="myFunc()" class="bttn-next">Next</button>
         </div>
     </div>
 </body>
