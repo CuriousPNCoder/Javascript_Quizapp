@@ -107,10 +107,10 @@
 <body>
     <div class="body-back">
         <div class="card">
-            <div>
-    <p class="question-heading" id="questionlist">Who is considered as the father of HTML’s ?</p>
+            <div class="quizcontainer">
+    <p class="question-heading" id="questiontext">Who is considered as the father of HTML’s ?</p>
     <div class="gap-bottom">
-        <div class="answer-list" id="answerlist">
+        <div class="answer-list" onclick="checkAnswer(0)">
             <label class="container">The father of HTML is Tim Berners-Lee
                 <input type="radio" checked="checked" name="radio">
                 <span class="checkmark"></span>
@@ -118,142 +118,165 @@
         </div>
     </div>
     <div class="gap-bottom">
-        <div class="answer-list">
-            <label class="container">The father of HTML is Tim Berners-Lee
+        <div class="answer-list" onclick="checkAnswer(1)">
+            <label class="container">Rasmus Lerdorf is considered as the father of HTML
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
         </div>
     </div>
     <div class="gap-bottom">
-        <div class="answer-list">
-            <label class="container">The father of HTML is Tim Berners-Lee
+        <div class="answer-list" onclick="checkAnswer(2)">
+            <label class="container">Brendan Eich, is considered as the father of HTML
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
         </div>
     </div>
     <div class="gap-bottom">
-        <div class="answer-list">
-            <label class="container">The father of HTML is Tim Berners-Lee
+        <div class="answer-list" onclick="checkAnswer(3)">
+            <label class="container">The father of HTML is Sergey Brin
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
         </div>
     </div>
-            </div>
+          
             <div>
                 <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
                 <button class="bttn-next" id="next" style="display: block;">Next</button>
             </div>
         </div>
-
+</div>
 </body>
 <script>
     let questions = [
         {
             question: "Who is considered as the father of HTML’s ?",
-            answers: [
-                { option: "The father of HTML is Tim Berners-Lee", answer: true },
-                { option: "Rasmus Lerdorf is considered as the father of HTML", answer: false },
-                { option: "Brendan Eich, is considered as the father of HTML", answer: false },
-                { option: "The father of HTML is Sergey Brin", answer: false },
-            ]
+            answers: ["The father of HTML is Tim Berners-Lee", 
+                    "Rasmus Lerdorf is considered as the father of HTML", 
+                    "Brendan Eich, is considered as the father of HTML",
+                    "The father of HTML is Sergey Brin"],
+            correct: 0
         },
         {
             question: "What is the full form of HTML ?",
-            answers: [
-                { option: "The full form of HTML is HyperText Machine Language ", answer: false },
-                { option: "The full form of HTML is HyperText Marking Language ", answer: false },
-                { option: "The full form of HTML is HyperText Markup Language", answer: true },
-                { option: "The full form of HTML is HighText Marking Language", answer: false },
-            ]
+            answers: ["The full form of HTML is HyperText Machine Language",
+                    "The full form of HTML is HyperText Marking Language",
+                    "The full form of HTML is HyperText Markup Language",
+                    "The full form of HTML is HighText Marking Language"],
+            correct: 2
         },
         {
             question: "Which of the following programmes reads and renders an HTML page?",
-            answers: [
-                { option: "Web matrix", answer: false },
-                { option: "Web matrix", answer: false },
-                { option: "Web matrix", answer: false },
-                { option: " Web matrix", answer: true },
-            ]
+            answers: ["Web matrix", 
+                    "Web matrix",
+                    "Web matrix",
+                    "Web matrix"],
+            correct: 3
         },
-        {
-            question: "What is the DOM (Document Object Model) in HTML?",
-            answers: [
-                { option: "Language-dependent application programming", answer: false },
-                { option: "ASP.NET object hierarchy ", answer: false },
-                { option: "Application programming interface", answer: false },
-                { option: "HTML document object representation and interaction convention", answer: true },
-            ]
-        },
-        {
-            question: "Which of the following is not an HTML table layout element?",
-            answers: [
-                { option: "colour,", answer: true },
-                { option: "size, and", answer: false },
-                { option: "span", answer: false },
-                { option: "alignment,", answer: false },
-            ]
-        },
-        {
-            question: "Which HTML5 element is used to style the layout?",
-            answers: [
-                { option: "jQuery ", answer: false },
-                { option: "CSS", answer: true },
-                { option: "JavaScript", answer: false },
-                { option: "PHP ,", answer: false },
-            ]
-        },
-        {
-            question: "What is the purpose of the HTML5 address> element?",
-            answers: [
-                { option: "contains IP address", answer: false },
-                { option: "contains home address", answer: false },
-                { option: "provides url", answer: false },
-                { option: "contains author contact", answer: true },
-            ]
-        },
-        {
-            question: "What is the purpose of the HTML5 address> element?",
-            answers: [
-                { option: "contains IP address", answer: false },
-                { option: "contains home address", answer: false },
-                { option: "provides url", answer: false },
-                { option: "contains author contact", answer: true },
-            ]
-        },
-        {
-            question: "When a tag in HTML is closed, which character is used to represent it?",
-            answers: [
-                { option: "#", answer: false },
-                { option: "!", answer: false },
-                { option: "/", answer: true },
-                { option: "'", answer: false },
-            ]
-        },
-        {
-            question: "What is the purpose of the HTML5 address> element?",
-            answers: [
-                { option: "provides url", answer: false },
-                { option: "contains author contact  information ", answer: true },
-                { option: "contains home address", answer: false },
-                { option: "contains IP address", answer: false },
-            ]
-        }
+        // {
+        //     question: "What is the DOM (Document Object Model) in HTML?",
+        //     answers: [
+        //         { option: "Language-dependent application programming", answer: false },
+        //         { option: "ASP.NET object hierarchy ", answer: false },
+        //         { option: "Application programming interface", answer: false },
+        //         { option: "HTML document object representation and interaction convention", answer: true },
+        //     ]
+        // },
+        // {
+        //     question: "Which of the following is not an HTML table layout element?",
+        //     answers: [
+        //         { option: "colour,", answer: true },
+        //         { option: "size, and", answer: false },
+        //         { option: "span", answer: false },
+        //         { option: "alignment,", answer: false },
+        //     ]
+        // },
+        // {
+        //     question: "Which HTML5 element is used to style the layout?",
+        //     answers: [
+        //         { option: "jQuery ", answer: false },
+        //         { option: "CSS", answer: true },
+        //         { option: "JavaScript", answer: false },
+        //         { option: "PHP ,", answer: false },
+        //     ]
+        // },
+        // {
+        //     question: "What is the purpose of the HTML5 address> element?",
+        //     answers: [
+        //         { option: "contains IP address", answer: false },
+        //         { option: "contains home address", answer: false },
+        //         { option: "provides url", answer: false },
+        //         { option: "contains author contact", answer: true },
+        //     ]
+        // },
+        // {
+        //     question: "What is the purpose of the HTML5 address> element?",
+        //     answers: [
+        //         { option: "contains IP address", answer: false },
+        //         { option: "contains home address", answer: false },
+        //         { option: "provides url", answer: false },
+        //         { option: "contains author contact", answer: true },
+        //     ]
+        // },
+        // {
+        //     question: "When a tag in HTML is closed, which character is used to represent it?",
+        //     answers: [
+        //         { option: "#", answer: false },
+        //         { option: "!", answer: false },
+        //         { option: "/", answer: true },
+        //         { option: "'", answer: false },
+        //     ]
+        // },
+        // {
+        //     question: "What is the purpose of the HTML5 address> element?",
+        //     answers: [
+        //         { option: "provides url", answer: false },
+        //         { option: "contains author contact  information ", answer: true },
+        //         { option: "contains home address", answer: false },
+        //         { option: "contains IP address", answer: false },
+        //     ]
+        // }
     ]
 
-    let questionList = document.getElementById("questionlist");
-    let current = 0;
-    let questionIndex = current+1;
 
-    questionList.innerHTML = '('+ questionIndex +')' + "  " + questions[current].question;
+    let currentQuestion = 0;
+    let currentAnswer = 0;
 
-    let answerList = document.getElementById("answerlist");
-    answerList.innerHTML = '(' + questionIndex + ')' + "  " + questions.answers.option[current].question;
+    function showQuestion(){
+        let questionText = document.getElementById("questiontext");
+        questionText.textContent = questions[currentQuestion].question;
 
+       let answers = document.querySelectorAll(".container");
+       answers.forEach((container, index)=>{
+        container.textContent = questions[currentQuestion].answers[index]
+       })
+    }
 
+    function checkAnswer(selected){
+        if(selected === questions[currentQuestion].correct){
+            console.log("answer is correct");
+            currentAnswer++;
+        }
+        else{
+            console.log("answer is incorrect")
+        }
 
+        setTimeout(()=>{
+            currentQuestion++;
+
+            if(currentQuestion <questions.length){
+                showQuestion();
+            }
+            else{
+                let quizContainer = document.querySelector(".quizcontainer");
+                quizContainer.innerHTML = "You got" + " " + {currentAnswer} + " " + "out of" + {questions}
+                // console.log("You got a correct answer", currentAnswer, "out of", questions.length)
+            }
+        }, 2000)
+    }
+    showQuestion();
 
 </script>
 
