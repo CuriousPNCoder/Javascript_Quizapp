@@ -26,57 +26,128 @@
         }
 
         .bttn-next {
-            padding: 6px 25px;
+            padding: 9px 29px;
             border-radius: 6px;
             border: none;
             background-color: #397fc3;
             color: white;
+            float: right;
+            font-size: 15px;
         }
-        .bttn-prev{
-             padding: 6px 25px;
+
+        .bttn-prev {
+            padding: 9px 29px;
             border-radius: 6px;
             border: none;
             background-color: #dddddd;
             color: rgb(145, 145, 145);
+            font-size: 15px;
         }
-        .card{
+
+        .card {
             background-color: #ffffff;
             width: 92%;
         }
-        .question-heading{
+
+        .question-heading {
             font-size: 24px;
+        }
+
+        /* The container */
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 19px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 23px;
+            width: 23px;
+            background-color: #eee;
+            border-radius: 50%;
+        }
+        .container:hover input~.checkmark {
+            background-color: #ccc;
+        }
+        .container input:checked~.checkmark {
+            background-color: #397fc3;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .container input:checked~.checkmark:after {
+            display: block;
+        }
+        .container .checkmark:after {
+            top: 8px;
+            left: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
         }
     </style>
 </head>
 
 <body>
     <div class="body-back">
-        <!-- <div class="score">
-<span id="user-score"></span>
-<span>/</span>
-<span id="total-score"></span>
-</div> -->
         <div class="card">
-            <p class="question-heading">Who is considered as the father of HTML’s ?</p>
-            <div class="gap-bottom">
-                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            </div>
-            <div class="gap-bottom">
-                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            </div>
-            <div class="gap-bottom">
-                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            </div>
-            <div class="gap-bottom">
-                <div class="answer-list">The father of HTML is Tim Berners-Lee</div>
-            </div>
-
-        </div>
-        <div>
-            <button class="bttn-prev">Prev</button>
-            <button onclick="myFunc()" class="bttn-next">Next</button>
+            <div>
+    <p class="question-heading" id="questionlist">Who is considered as the father of HTML’s ?</p>
+    <div class="gap-bottom">
+        <div class="answer-list" id="answerlist">
+            <label class="container">The father of HTML is Tim Berners-Lee
+                <input type="radio" checked="checked" name="radio">
+                <span class="checkmark"></span>
+            </label>
         </div>
     </div>
+    <div class="gap-bottom">
+        <div class="answer-list">
+            <label class="container">The father of HTML is Tim Berners-Lee
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="gap-bottom">
+        <div class="answer-list">
+            <label class="container">The father of HTML is Tim Berners-Lee
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="gap-bottom">
+        <div class="answer-list">
+            <label class="container">The father of HTML is Tim Berners-Lee
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+            </div>
+            <div>
+                <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
+                <button class="bttn-next" id="next" style="display: block;">Next</button>
+            </div>
+        </div>
+
 </body>
 <script>
     let questions = [
@@ -172,13 +243,17 @@
         }
     ]
 
-    function myFunc() {
-        const displayQuestion = []
-        for (let i = 0; i < questions.length; i++) {
-            displayQuestion.push = questions[i]
-        }
-        console.log(displayQuestion)
-    }
+    let questionList = document.getElementById("questionlist");
+    let current = 0;
+    let questionIndex = current+1;
+
+    questionList.innerHTML = '('+ questionIndex +')' + "  " + questions[current].question;
+
+    let answerList = document.getElementById("answerlist");
+    answerList.innerHTML = '(' + questionIndex + ')' + "  " + questions.answers.option[current].question;
+
+
+
 
 </script>
 
