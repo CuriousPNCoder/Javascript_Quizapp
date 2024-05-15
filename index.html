@@ -155,10 +155,10 @@
 
     <p id="feedback"></p>
           
-            <!-- <div>
-                <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
-                <button class="bttn-next" id="next" style="display: block;">Next</button>
-            </div> -->
+            <div>
+            <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
+            <button class="bttn-next" id="next" style="display: block;" onclick="nextQuestion()">Next</button>
+            </div>
         </div>
 </div>
 </body>
@@ -258,22 +258,25 @@
     let currentAnswer = 0;
 
     function showQuestion(){
-        let questionText = document.getElementById("questiontext");
+      let questionText = document.getElementById("questiontext");
         questionText.textContent = questions[currentQuestion].question;
 
-               let timerElement = document.querySelector(".timer");
+        let answers = document.querySelectorAll(".container");
+        answers.forEach((container, index) => {
+            container.textContent = questions[currentQuestion].answers[index];
+            container.parentElement.style.backgroundColor = ""; // Reset background color
+        });
+
+        let feedback = document.getElementById("feedback");
+        feedback.textContent = "";
+
+        selectedAnswer = null;
+
+        let timerElement = document.querySelector(".timer");
         timerElement.textContent = "";
 
-       let answers = document.querySelectorAll(".container");
-       answers.forEach((container, index)=>{
-        container.textContent = questions[currentQuestion].answers[index]
-       });
 
-       let feedback = document.getElementById("feedback");
-       feedback.textContent = "";
-
-
-               let countdown = 2;
+               let countdown = 10;
         timerElement = document.querySelector(".timer");
         timerElement.innerHTML = `Next question in ${countdown} seconds....`
 
@@ -300,23 +303,37 @@
 
 
 
-    function checkAnswer(selected){
-        if(selected === questions[currentQuestion].correct){
-            let feedback = document.getElementById("feedback");
-            feedback.innerText = "Your answer is correct"
-            feedback.style.color = "green"
-            console.log("answer is correct");
+    function checkAnswer(selected) {
+        selectedAnswer = selected;
+        let feedback = document.getElementById("feedback");
+        let answerContainers = document.querySelectorAll(".answer-list");
+
+        if (selected === questions[currentQuestion].correct) {
+            feedback.innerText = "Your answer is correct";
+            feedback.style.color = "green";
+            answerContainers[selected].style.backgroundColor = "green";
             currentAnswer++;
+        } else {
+            feedback.innerText = "Your answer is not correct! Please try again";
+            feedback.style.color = "red";
+            answerContainers[selected].style.backgroundColor = "red";
         }
-        else{
-            feedback.innerText = "Your answer is not correct! Please try again"
-            feedback.style.color = "red"
-            console.log("answer is incorrect")
-        }
-
-
-
     }
+     function nextQuestion() {
+            if (selectedAnswer === null) {
+                alert("Please select an answer before proceeding.");
+                return;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                const quizContainer = document.querySelector(".quizcontainer");
+                quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions correct.</p>`;
+            }
+        }
     showQuestion();
 
 </script>
