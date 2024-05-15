@@ -108,17 +108,22 @@
             font-weight: 600;
             font-size: 17px;
         }
+        .timer{
+            float: right;
+        }
     </style>
 </head>
 
 <body>
     <div class="body-back">
         <div class="card">
+          
             <div class="quizcontainer">
-    <p class="question-heading" id="questiontext">Who is considered as the father of HTML’s ?</p>
+                <div class="timer"></div>
+    <p class="question-heading" id="questiontext"></p>
     <div class="gap-bottom">
         <div class="answer-list" onclick="checkAnswer(0)">
-            <label class="container">The father of HTML is Tim Berners-Lee
+            <label class="container">
                 <input type="radio" checked="checked" name="radio">
                 <span class="checkmark"></span>
             </label>
@@ -126,15 +131,14 @@
     </div>
     <div class="gap-bottom">
         <div class="answer-list" onclick="checkAnswer(1)">
-            <label class="container">Rasmus Lerdorf is considered as the father of HTML
+            <label class="container">
                 <input type="radio" name="radio">
-                <span class="checkmark"></span>
             </label>
         </div>
     </div>
     <div class="gap-bottom">
         <div class="answer-list" onclick="checkAnswer(2)">
-            <label class="container">Brendan Eich, is considered as the father of HTML
+            <label class="container">
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
@@ -142,7 +146,7 @@
     </div>
     <div class="gap-bottom">
         <div class="answer-list" onclick="checkAnswer(3)">
-            <label class="container">The father of HTML is Sergey Brin
+            <label class="container">
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
@@ -257,6 +261,9 @@
         let questionText = document.getElementById("questiontext");
         questionText.textContent = questions[currentQuestion].question;
 
+               let timerElement = document.querySelector(".timer");
+        timerElement.textContent = "";
+
        let answers = document.querySelectorAll(".container");
        answers.forEach((container, index)=>{
         container.textContent = questions[currentQuestion].answers[index]
@@ -264,6 +271,31 @@
 
        let feedback = document.getElementById("feedback");
        feedback.textContent = "";
+
+
+               let countdown = 20;
+        timerElement = document.querySelector(".timer");
+        timerElement.innerHTML = `Next question in ${countdown} seconds....`
+
+        let intervalId = setInterval(() => {
+            countdown--;
+            timerElement.innerHTML = `Next question in ${countdown} seconds....`
+
+            if (countdown <= 0) {
+                clearInterval(intervalId);
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                }
+                else {
+                    const quizContainer = document.querySelector(".quizcontainer");
+                    quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions.</p>`;
+                }
+            }
+        }, 1000)
+
+
     }
 
 
@@ -282,17 +314,8 @@
             console.log("answer is incorrect")
         }
 
-        setTimeout(()=>{
-            currentQuestion++;
 
-            if(currentQuestion <questions.length){
-                showQuestion();
-            }
-            else{
-                let quizContainer = document.querySelector(".quizcontainer");
-               quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions.</p>`;
-            }
-        }, 2000)
+
     }
     showQuestion();
 
