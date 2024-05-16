@@ -65,11 +65,13 @@
             -ms-user-select: none;
             user-select: none;
         }
+
         .container input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
         }
+
         .checkmark {
             position: absolute;
             top: 0;
@@ -79,20 +81,25 @@
             background-color: #eee;
             border-radius: 50%;
         }
+
         .container:hover input~.checkmark {
             background-color: #ccc;
         }
+
         .container input:checked~.checkmark {
             background-color: #397fc3;
         }
+
         .checkmark:after {
             content: "";
             position: absolute;
             display: none;
         }
+
         .container input:checked~.checkmark:after {
             display: block;
         }
+
         .container .checkmark:after {
             top: 8px;
             left: 8px;
@@ -101,14 +108,16 @@
             border-radius: 50%;
             background: white;
         }
-        #feedback{
+
+        #feedback {
             justify-content: center;
             display: flex;
             align-items: center;
             font-weight: 600;
             font-size: 17px;
         }
-        .timer{
+
+        .timer {
             float: right;
         }
     </style>
@@ -119,72 +128,75 @@
         <div class="card">
             <div class="quizcontainer">
                 <div class="timer"></div>
-    <p class="question-heading" id="questiontext"></p>
-    <div class="gap-bottom">
-        <div class="answer-list" onclick="checkAnswer(0)">
-            <label class="container">
-                <input type="radio" checked="checked" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <div class="gap-bottom">
-        <div class="answer-list" onclick="checkAnswer(1)">
-            <label class="container">
-                <input type="radio" name="radio">
-            </label>
-        </div>
-    </div>
-    <div class="gap-bottom">
-        <div class="answer-list" onclick="checkAnswer(2)">
-            <label class="container">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <div class="gap-bottom">
-        <div class="answer-list" onclick="checkAnswer(3)">
-            <label class="container">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
+                <video id="videoElement" autoplay muted style="display: none; border-radius: 12px;" width="9%"></video>
 
-    <p id="feedback"></p>
-          
-            <div>
-            <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
-            <button class="bttn-next" id="next" style="display: block;" onclick="nextQuestion()">Next</button>
+                <p class="question-heading" id="questiontext"></p>
+                <div class="gap-bottom">
+                    <div class="answer-list" onclick="checkAnswer(0)">
+                        <label class="container">
+                            <input type="radio" checked="checked" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="gap-bottom">
+                    <div class="answer-list" onclick="checkAnswer(1)">
+                        <label class="container">
+                            <input type="radio" name="radio">
+                        </label>
+                    </div>
+                </div>
+                <div class="gap-bottom">
+                    <div class="answer-list" onclick="checkAnswer(2)">
+                        <label class="container">
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="gap-bottom">
+                    <div class="answer-list" onclick="checkAnswer(3)">
+                        <label class="container">
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <p id="feedback"></p>
+
+                <div>
+                    <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
+                    <button class="bttn-next" id="next" style="display: block;" onclick="nextQuestion()">Next</button>
+                </div>
             </div>
+
         </div>
-</div>
 </body>
 <script>
     let questions = [
         {
             question: "Who is considered as the father of HTML’s ?",
-            answers: ["The father of HTML is Tim Berners-Lee", 
-                    "Rasmus Lerdorf is considered as the father of HTML", 
-                    "Brendan Eich, is considered as the father of HTML",
-                    "The father of HTML is Sergey Brin"],
+            answers: ["The father of HTML is Tim Berners-Lee",
+                "Rasmus Lerdorf is considered as the father of HTML",
+                "Brendan Eich, is considered as the father of HTML",
+                "The father of HTML is Sergey Brin"],
             correct: 0
         },
         {
             question: "What is the full form of HTML ?",
             answers: ["The full form of HTML is HyperText Machine Language",
-                    "The full form of HTML is HyperText Marking Language",
-                    "The full form of HTML is HyperText Markup Language",
-                    "The full form of HTML is HighText Marking Language"],
+                "The full form of HTML is HyperText Marking Language",
+                "The full form of HTML is HyperText Markup Language",
+                "The full form of HTML is HighText Marking Language"],
             correct: 2
         },
         {
             question: "Which of the following programmes reads and renders an HTML page?",
-            answers: ["Web matrix", 
-                    "Web matrix",
-                    "Web matrix",
-                    "Web matrix"],
+            answers: ["Web matrix",
+                "Web matrix",
+                "Web matrix",
+                "Web matrix"],
             correct: 3
         },
         {
@@ -193,20 +205,20 @@
                 "ASP.NET object hierarchy",
                 "Application programming interface",
                 "HTML document object representation and interaction convention"],
-                correct: 3
+            correct: 3
         },
         {
             question: "Which of the following is not an HTML table layout element?",
-             answers:[
+            answers: [
                 "colour",
                 "size, and",
                 "span",
-                "alignment" ],
-                correct: 0
+                "alignment"],
+            correct: 0
         },
         {
             question: "Which HTML5 element is used to style the layout?",
-            answers: ["jQuery","CSS","JavaScript","PHP"],
+            answers: ["jQuery", "CSS", "JavaScript", "PHP"],
             correct: 1
         },
         {
@@ -239,8 +251,8 @@
     let currentQuestion = 0;
     let currentAnswer = 0;
 
-    function showQuestion(){
-      let questionText = document.getElementById("questiontext");
+    function showQuestion() {
+        let questionText = document.getElementById("questiontext");
         questionText.textContent = questions[currentQuestion].question;
 
         let answers = document.querySelectorAll(".container");
@@ -257,7 +269,7 @@
         let timerElement = document.querySelector(".timer");
         timerElement.textContent = "";
 
-               let countdown = 5;
+        let countdown = 5;
         timerElement = document.querySelector(".timer");
         timerElement.innerHTML = `Next question in ${countdown} seconds....`
 
@@ -273,6 +285,7 @@
                     showQuestion();
                 }
                 else {
+                            stopRecording();
                     const quizContainer = document.querySelector(".quizcontainer");
                     quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions.</p>`;
                 }
@@ -296,21 +309,62 @@
             answerContainers[selected].style.backgroundColor = "red";
         }
     }
-     function nextQuestion() {
-            if (selectedAnswer === null) {
-                alert("Please select an answer before proceeding.");
-                return;
-            }
+    function nextQuestion() {
+        if (selectedAnswer === null) {
+            alert("Please select an answer before proceeding.");
+            return;
+        }
 
-            currentQuestion++;
+        currentQuestion++;
 
-            if (currentQuestion < questions.length) {
-                showQuestion();
-            } else {
-                const quizContainer = document.querySelector(".quizcontainer");
-                quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions correct.</p>`;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            const quizContainer = document.querySelector(".quizcontainer");
+            quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions correct.</p>`;
+        }
+    }
+
+
+    // cammera settings on
+    let mediaRecorder;
+    let recordedChunks = [];
+    let videoElement = document.getElementById('videoElement');
+
+    // Automatically start camera access and recording
+    startRecording();
+
+    async function startRecording() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            videoElement.srcObject = stream;
+            videoElement.style.display = 'block';
+
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = handleDataAvailable;
+            mediaRecorder.start();
+        } catch (error) {
+            console.error('Error accessing camera:', error);
+        }
+    }
+
+    function handleDataAvailable(event) {
+        if (event.data.size > 0) {
+            recordedChunks.push(event.data);
+        }
+    }
+
+    function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+
+                // Stop the camera stream
+                const stream = videoElement.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
             }
         }
+
     showQuestion();
 
 </script>

@@ -133,8 +133,15 @@
         </div>
         <div>
         </div>
-        <button class="start-bttn"><a class="link-desc" href="quizQuestion.html">Start The Test</a></button>
+        <button class="start-bttn" id="startTest">Start The Test</button>
     </div>
+
+    <script>
+        document.getElementById("startTest").onclick = function () {
+            // Redirect to the quiz page
+            window.location.href = "quizQuestion.html";
+        };
+    </script>
 
 </body>
 
