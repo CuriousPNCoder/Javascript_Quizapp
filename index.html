@@ -188,69 +188,52 @@
                     "Web matrix"],
             correct: 3
         },
-        // {
-        //     question: "What is the DOM (Document Object Model) in HTML?",
-        //     answers: [
-        //         { option: "Language-dependent application programming", answer: false },
-        //         { option: "ASP.NET object hierarchy ", answer: false },
-        //         { option: "Application programming interface", answer: false },
-        //         { option: "HTML document object representation and interaction convention", answer: true },
-        //     ]
-        // },
-        // {
-        //     question: "Which of the following is not an HTML table layout element?",
-        //     answers: [
-        //         { option: "colour,", answer: true },
-        //         { option: "size, and", answer: false },
-        //         { option: "span", answer: false },
-        //         { option: "alignment,", answer: false },
-        //     ]
-        // },
-        // {
-        //     question: "Which HTML5 element is used to style the layout?",
-        //     answers: [
-        //         { option: "jQuery ", answer: false },
-        //         { option: "CSS", answer: true },
-        //         { option: "JavaScript", answer: false },
-        //         { option: "PHP ,", answer: false },
-        //     ]
-        // },
-        // {
-        //     question: "What is the purpose of the HTML5 address> element?",
-        //     answers: [
-        //         { option: "contains IP address", answer: false },
-        //         { option: "contains home address", answer: false },
-        //         { option: "provides url", answer: false },
-        //         { option: "contains author contact", answer: true },
-        //     ]
-        // },
-        // {
-        //     question: "What is the purpose of the HTML5 address> element?",
-        //     answers: [
-        //         { option: "contains IP address", answer: false },
-        //         { option: "contains home address", answer: false },
-        //         { option: "provides url", answer: false },
-        //         { option: "contains author contact", answer: true },
-        //     ]
-        // },
-        // {
-        //     question: "When a tag in HTML is closed, which character is used to represent it?",
-        //     answers: [
-        //         { option: "#", answer: false },
-        //         { option: "!", answer: false },
-        //         { option: "/", answer: true },
-        //         { option: "'", answer: false },
-        //     ]
-        // },
-        // {
-        //     question: "What is the purpose of the HTML5 address> element?",
-        //     answers: [
-        //         { option: "provides url", answer: false },
-        //         { option: "contains author contact  information ", answer: true },
-        //         { option: "contains home address", answer: false },
-        //         { option: "contains IP address", answer: false },
-        //     ]
-        // }
+        {
+            question: "What is the DOM (Document Object Model) in HTML?",
+            answers: ["Language-dependent application programming",
+                "ASP.NET object hierarchy",
+                "Application programming interface",
+                "HTML document object representation and interaction convention"],
+                correct: 3
+        },
+        {
+            question: "Which of the following is not an HTML table layout element?",
+             answers:[
+                "colour",
+                "size, and",
+                "span",
+                "alignment" ],
+                correct: 0
+        },
+        {
+            question: "Which HTML5 element is used to style the layout?",
+            answers: ["jQuery","CSS","JavaScript","PHP"],
+            correct: 1
+        },
+        {
+            question: "What is the purpose of the HTML5 address> element?",
+            answers: [
+                "contains IP address",
+                "contains home address",
+                "provides url",
+                "contains author contact"
+            ],
+            correct: 3
+        },
+        {
+            question: "When a tag in HTML is closed, which character is used to represent it?",
+            answers: [
+                "#", "!", "/", "'",
+            ],
+            correct: 2
+        },
+        {
+            question: "What is the purpose of the HTML5 address> element?",
+            answers: [
+                "provides url", "contains author contact  information", "contains home address", "contains IP address"
+            ],
+            correct: 1
+        },
     ]
 
 
@@ -264,7 +247,7 @@
         let answers = document.querySelectorAll(".container");
         answers.forEach((container, index) => {
             container.textContent = questions[currentQuestion].answers[index];
-            container.parentElement.style.backgroundColor = ""; // Reset background color
+            container.parentElement.style.backgroundColor = "";
         });
 
         let feedback = document.getElementById("feedback");
@@ -297,8 +280,6 @@
                 }
             }
         }, 1000)
-
-
     }
 
     function checkAnswer(selected) {
