@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Quiz App</title>
+    <style>
+        .answer-list {
+            background-color: rgba(243, 243, 243, 0.185);
+            padding: 20px 30px;
+            width: auto;
+            border: 1px solid rgb(227, 227, 227);
+            border-radius: 20px;
+        }
+
+        .body-back {
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gap-bottom {
+            padding-bottom: 15px;
+        }
+
+        .bttn-next {
+            padding: 9px 29px;
+            border-radius: 6px;
+            border: none;
+            background-color: #397fc3;
+            color: white;
+            float: right;
+            font-size: 15px;
+        }
+
+        .bttn-prev {
+            padding: 9px 29px;
+            border-radius: 6px;
+            border: none;
+            background-color: #dddddd;
+            color: rgb(145, 145, 145);
+            font-size: 15px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            width: 92%;
+        }
+
+        .question-heading {
+            font-size: 24px;
+        }
+
+        /* The container */
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 19px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 23px;
+            width: 23px;
+            background-color: #eee;
+            border-radius: 50%;
+        }
+        .container:hover input~.checkmark {
+            background-color: #ccc;
+        }
+        .container input:checked~.checkmark {
+            background-color: #397fc3;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .container input:checked~.checkmark:after {
+            display: block;
+        }
+        .container .checkmark:after {
+            top: 8px;
+            left: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        #feedback{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 17px;
+        }
+        .timer{
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-back">
+        <div class="card">
+            <div class="quizcontainer">
+                <div class="timer"></div>
+    <p class="question-heading" id="questiontext"></p>
+    <div class="gap-bottom">
+        <div class="answer-list" onclick="checkAnswer(0)">
+            <label class="container">
+                <input type="radio" checked="checked" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="gap-bottom">
+        <div class="answer-list" onclick="checkAnswer(1)">
+            <label class="container">
+                <input type="radio" name="radio">
+            </label>
+        </div>
+    </div>
+    <div class="gap-bottom">
+        <div class="answer-list" onclick="checkAnswer(2)">
+            <label class="container">
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="gap-bottom">
+        <div class="answer-list" onclick="checkAnswer(3)">
+            <label class="container">
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+
+    <p id="feedback"></p>
+          
+            <div>
+            <button class="bttn-prev" id="prev" style="display: none;">Prev</button>
+            <button class="bttn-next" id="next" style="display: block;" onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+</div>
+</body>
+<script>
+    let questions = [
+        {
+            question: "Who is considered as the father of HTML’s ?",
+            answers: ["The father of HTML is Tim Berners-Lee", 
+                    "Rasmus Lerdorf is considered as the father of HTML", 
+                    "Brendan Eich, is considered as the father of HTML",
+                    "The father of HTML is Sergey Brin"],
+            correct: 0
+        },
+        {
+            question: "What is the full form of HTML ?",
+            answers: ["The full form of HTML is HyperText Machine Language",
+                    "The full form of HTML is HyperText Marking Language",
+                    "The full form of HTML is HyperText Markup Language",
+                    "The full form of HTML is HighText Marking Language"],
+            correct: 2
+        },
+        {
+            question: "Which of the following programmes reads and renders an HTML page?",
+            answers: ["Web matrix", 
+                    "Web matrix",
+                    "Web matrix",
+                    "Web matrix"],
+            correct: 3
+        },
+        {
+            question: "What is the DOM (Document Object Model) in HTML?",
+            answers: ["Language-dependent application programming",
+                "ASP.NET object hierarchy",
+                "Application programming interface",
+                "HTML document object representation and interaction convention"],
+                correct: 3
+        },
+        {
+            question: "Which of the following is not an HTML table layout element?",
+             answers:[
+                "colour",
+                "size, and",
+                "span",
+                "alignment" ],
+                correct: 0
+        },
+        {
+            question: "Which HTML5 element is used to style the layout?",
+            answers: ["jQuery","CSS","JavaScript","PHP"],
+            correct: 1
+        },
+        {
+            question: "What is the purpose of the HTML5 address> element?",
+            answers: [
+                "contains IP address",
+                "contains home address",
+                "provides url",
+                "contains author contact"
+            ],
+            correct: 3
+        },
+        {
+            question: "When a tag in HTML is closed, which character is used to represent it?",
+            answers: [
+                "#", "!", "/", "'",
+            ],
+            correct: 2
+        },
+        {
+            question: "What is the purpose of the HTML5 address> element?",
+            answers: [
+                "provides url", "contains author contact  information", "contains home address", "contains IP address"
+            ],
+            correct: 1
+        },
+    ]
+
+
+    let currentQuestion = 0;
+    let currentAnswer = 0;
+
+    function showQuestion(){
+      let questionText = document.getElementById("questiontext");
+        questionText.textContent = questions[currentQuestion].question;
+
+        let answers = document.querySelectorAll(".container");
+        answers.forEach((container, index) => {
+            container.textContent = questions[currentQuestion].answers[index];
+            container.parentElement.style.backgroundColor = "";
+        });
+
+        let feedback = document.getElementById("feedback");
+        feedback.textContent = "";
+
+        selectedAnswer = null;
+
+        let timerElement = document.querySelector(".timer");
+        timerElement.textContent = "";
+
+               let countdown = 5;
+        timerElement = document.querySelector(".timer");
+        timerElement.innerHTML = `Next question in ${countdown} seconds....`
+
+        let intervalId = setInterval(() => {
+            countdown--;
+            timerElement.innerHTML = `Next question in ${countdown} seconds....`
+
+            if (countdown <= 0) {
+                clearInterval(intervalId);
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                }
+                else {
+                    const quizContainer = document.querySelector(".quizcontainer");
+                    quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions.</p>`;
+                }
+            }
+        }, 1000)
+    }
+
+    function checkAnswer(selected) {
+        selectedAnswer = selected;
+        let feedback = document.getElementById("feedback");
+        let answerContainers = document.querySelectorAll(".answer-list");
+
+        if (selected === questions[currentQuestion].correct) {
+            feedback.innerText = "Your answer is correct";
+            feedback.style.color = "green";
+            answerContainers[selected].style.backgroundColor = "green";
+            currentAnswer++;
+        } else {
+            feedback.innerText = "Your answer is not correct! Please try again";
+            feedback.style.color = "red";
+            answerContainers[selected].style.backgroundColor = "red";
+        }
+    }
+     function nextQuestion() {
+            if (selectedAnswer === null) {
+                alert("Please select an answer before proceeding.");
+                return;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                const quizContainer = document.querySelector(".quizcontainer");
+                quizContainer.innerHTML = `<p>You got ${currentAnswer} out of ${questions.length} questions correct.</p>`;
+            }
+        }
+    showQuestion();
+
+</script>
+
+</html>
